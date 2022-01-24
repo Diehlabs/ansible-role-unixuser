@@ -1,0 +1,9 @@
+---
+- name: Converge
+  hosts: all
+  vars:
+    user_id: chris
+  tasks:
+    - name: "Include unixuser"
+      include_role:
+        name: "ansible-role-unixuser"

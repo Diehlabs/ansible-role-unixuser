@@ -1,0 +1,21 @@
+name: Ansible Test
+
+on: [push, pull_request]
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Lint Ansible Role
+        uses: ansible/ansible-lint-action@master
+        with:
+          override-deps: ansible-lint==5.3.2
+          # targets:
+          #   tests/test.yml
+
+# name: Ansible Test
+# on: [push, pull_request]
+# jobs:
+#   test:
+#     uses: Diehlabs/.github/.github/workflows/ansible-test.yml@v.0.0.8

@@ -1,0 +1,106 @@
+# {{ ansible_managed }}
+# antigen version: {{ unixuser_antigen_installed_version }}
+
+if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
+  source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
+fi
+
+export TERM="xterm-25color"
+export EDITOR="vim"
+export PATH="$PATH:{{ unixuser_path | join(":") }}"
+{% for env_var in unixuser_profile_env_vars %}
+    export {{ env_var }}
+{% endfor %}
+
+HIST_STAMPS="yyyy-mm-dd"
+UPDATE_ZSH_DAYS="{{ unixuser_zsh_update_interval }}"
+COMPLETION_WAITING_DOTS="true"
+
+# ADOTDIR="{{ unixuser_antigen_path_compat }}"
+ANTIGEN_BUNDLES="{{ unixuser_antigen_path_compat }}/bundles"
+ANTIGEN_PLUGIN_UPDATE_DAYS="{{ unixuser_zsh_update_interval }}"
+ANTIGEN_SYSTEM_UPDATE_DAYS="{{ unixuser_zsh_update_interval }}"
+
+source "{{ unixuser_antigen_path_compat }}/antigen/antigen.zsh"
+
+antigen use oh-my-zsh
+
+{% set bundles_enabled = [] %}
+
+{% for bundle in unixuser_antigen_bundles -%}
+    {%- if bundle is mapping -%}
+        {% set valid = true -%}
+        {% set command_not_exists = [] -%}
+
+        {%- if bundle.when is defined and not bundle.when -%}
+            {% set valid = false -%}
+        {% endif -%}
+
+        {% if bundle.command is defined -%}
+            {% for cmd in zsh_register_commands_exists.results -%}
+                {% if cmd.cmd is defined and cmd.rc != 0 and cmd.item.command == bundle.command -%}
+                    {% if command_not_exists.append(1) %}{% endif -%}
+                {% endif -%}
+            {% endfor -%}
+        {% endif -%}
+
+        {% if valid and not command_not_exists %}
+            {%- if 'zsh-syntax-highlighting' in bundle.name or 'fast-syntax-highlighting' in bundle.name -%}
+
+# will fixed in zsh-autosuggestion v0.4 - https://github.com/zsh-users/zsh-autosuggestions/pull/218
+if (( ZSHRC_LOAD_ONCE++ == 0 )); then
+    antigen bundle {{ bundle.name }}
+fi
+{% else -%}
+{% if bundles_enabled.append(bundle.name) %}{% endif -%}
+antigen bundle {{ bundle.name }}
+{% endif -%}
+        {% endif -%}
+    {%- else -%}
+{% if bundles_enabled.append(bundle) %}{% endif -%}
+antigen bundle {{ bundle }}
+{% endif %}
+{% endfor %}
+
+POWERLEVEL9K_INSTALLATION_PATH=$ANTIGEN_BUNDLES/bhilburn/powerlevel9k/powerlevel9k.zsh-theme
+
+antigen theme romkatv/powerlevel10k
+
+antigen apply
+
+###
+
+{# {% if not zsh_share_history %}
+unsetopt share_history
+{% endif %} #}
+
+autoload -Uz copy-earlier-word
+zle -N copy-earlier-word
+
+{# # hotkeys
+{% for hotkey in zsh_hotkeys %}
+{% if hotkey.hotkey != '' and (hotkey.bundle is not defined or hotkey.bundle in bundles_enabled) %}
+bindkey '{{ hotkey.hotkey }}' {{ hotkey.action }}
+{% endif %}
+{% endfor %} #}
+
+{# # aliases
+{% for alias in zsh_aliases %}
+{% if alias.alias != '' and (alias.bundle is not defined or alias.bundle in bundles_enabled) %}
+alias '{{ alias.alias }}'="{{ alias.action }}"
+{% endif %}
+{% endfor %} #}
+
+# zsh-autosuggestions
+ZSH_AUTOSUGGEST_BUFFER_MAX_SIZE={{ unixuser_zsh_autosuggestions_max_length }}
+ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE="fg=240" # gray highlight
+
+# Aliases
+alias suser='su -'
+
+{% if unixuser_zsh_load_etc_profile %}source /etc/profile{% endif %}
+
+# user configs
+[[ -r /etc/zsh/zshrc.local ]] && source /etc/zsh/zshrc.local
+[[ -r "$HOME/.zshrc.local" ]] && source "$HOME/.zshrc.local"
+[[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh

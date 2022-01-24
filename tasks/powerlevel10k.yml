@@ -1,0 +1,31 @@
+---
+# - name: Install Meso fonts
+# - https://github.com/romkatv/powerlevel10k-media/raw/master/MesloLGS%20NF%20Regular.ttf
+# - https://github.com/romkatv/powerlevel10k-media/raw/master/MesloLGS%20NF%20Bold.ttf
+# - https://github.com/romkatv/powerlevel10k-media/raw/master/MesloLGS%20NF%20Italic.ttf
+# - https://github.com/romkatv/powerlevel10k-media/raw/master/MesloLGS%20NF%20Bold%20Italic.ttf
+
+- name: Create Powerlevel 10k config
+  ansible.builtin.copy:
+    src: p10k.zsh
+    dest: "~{{ unixuser_user_id }}/.p10k.zsh"
+    owner: "{{ unixuser_user_id }}"
+    group: "{{ unixuser_primary_group }}"
+    mode: u=rw,g=r,o=r
+
+- name: Add .p10k.zsh to .zshrc.local
+  when: user_profile_env_vars is defined
+  loop: "{{ user_profile_env_vars }}"
+  ansible.builtin.lineinfile:
+    path: "~{{ unixuser_user_id }}/.zshrc.local"
+    #line: "[[ ! -f ~/.p10k.zsh ]] || source local"
+    line: "source ~/.p10k.zsh"
+    create: yes
+    owner: "{{ unixuser_user_id }}"
+    group: "{{ unixuser_primary_group }}"
+    mode: u=rw,g=r,o=r
+
+# add to ~/.zshrc_local for p10k auto prompt:
+# if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
+#   source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
+# fi

@@ -1,0 +1,15 @@
+---
+- name: Install dependencies (apt)
+  become: yes
+  ansible.builtin.package:
+    name: "{{ unixuser_apt_pkgs_default | union(unixuser_apt_pkgs) }}"
+    state: present
+    update_cache: yes
+
+- name: Add skip_global_compinit for disable early compinit call in Ubuntu
+  ansible.builtin.lineinfile:
+    regexp: "skip_global_compinit=1"
+    line: "skip_global_compinit=1"
+    dest: /etc/zsh/zshenv
+    state: present
+  when: ansible_distribution == 'Ubuntu'

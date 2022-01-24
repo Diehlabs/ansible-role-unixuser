@@ -1,0 +1,61 @@
+---
+- name: Clone antigen {{ unixuser_antigen_version }}
+  ansible.builtin.git:
+    repo: https://github.com/zsh-users/antigen.git
+    dest: "{{ unixuser_antigen_path }}/antigen"
+    version: "{{ unixuser_antigen_version }}"
+    force: yes
+  become: yes
+  become_user: "{{ unixuser_user_id }}"
+  register: zsh_register_antigen_clone
+
+- name: Set directory permissions
+  ansible.builtin.file:
+    name: "{{ unixuser_antigen_path }}"
+    owner: "{{ unixuser_user_id }}"
+    group: "{{ unixuser_primary_group }}"
+    recurse: yes
+  changed_when: false
+
+- name: Check antigen version
+  ansible.builtin.shell: |
+    set -o pipefail
+    cat "{{ unixuser_antigen_path }}/antigen/VERSION" | tr -d 'v'
+  args:
+    executable: /bin/bash
+  register: unixuser_register_antigen_version
+  changed_when: false
+  failed_when: false
+  check_mode: no
+
+- name: Set unixiser_antigen_installed_version variable
+  ansible.builtin.set_fact:
+    unixuser_antigen_installed_version: "{{ unixuser_register_antigen_version.stdout }}"
+
+- name: Merge bundles lists
+  ansible.builtin.set_fact:
+    unixuser_antigen_bundles: "{{ unixuser_antigen_bundles }} + {{ unixuser_antigen_bundles_extras }}"
+
+- name: Check commands exists
+  ansible.builtin.shell: "command -v {{ item.command }} || which {{ item.command }}"
+  with_items: "{{ unixuser_antigen_bundles }}"
+  failed_when: false
+  changed_when: false
+  check_mode: no
+  when: item.command is defined
+  register: zsh_register_commands_exists
+
+- name: Reset antigen cache
+  ansible.builtin.command: "/bin/zsh -c 'source {{ unixuser_zsh_config }}; antigen reset'"
+  become: yes
+  become_user: "{{ unixuser_user_id }}"
+  changed_when: false
+  failed_when: false
+
+# it will fail, but it install all bundles for user
+- name: Update antigen bundles
+  ansible.builtin.command: "/bin/zsh -c 'source {{ unixuser_zsh_config }}; antigen update'"
+  become: yes
+  become_user: "{{ unixuser_user_id }}"
+  changed_when: false
+  failed_when: false

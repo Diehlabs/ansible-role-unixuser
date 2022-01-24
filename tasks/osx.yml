@@ -1,0 +1,20 @@
+---
+- name: Install dependencies (brew)
+  become: no
+  community.general.homebrew:
+    state: present
+    name: "{{ unixuser_brew_pkgs_default | union(unixuser_brew_pkgs) }}"
+
+- name: Install homebrew casks
+  become: no
+  community.general.homebrew_cask:
+    state: present
+    name: "{{ unixuser_brew_pkgs_default | union(unixuser_brew_pkgs) }}"
+
+- name: Create iTerm2 profile
+  ansible.builtin.copy:
+    src: iterm2_profile.json
+    dest: "~/Library/Application Support/iTerm2/DynamicProfiles/{{ unixuser_user_id }}-profile.json"
+    owner: "{{ unixuser_user_id }}"
+    group: "{{ unixuser_primary_group }}"
+    mode: u=rw,g=rw,o=rw

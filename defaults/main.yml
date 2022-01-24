@@ -1,0 +1,85 @@
+---
+# defaults file for unixuser
+
+unixuser_user_id: "{{ user_id }}"
+
+unixuser_xtra_groups: []
+
+# unixuser_group_name:
+
+unixuser_shell: /bin/zsh
+
+unixuser_profile_env_vars: []
+  # - "VAULT_ADDR=\"https://hcv.diehlabs.com\""
+
+# unixuser_pub_ssh_keys:
+#   - https://github.com/cultclassik.keys
+
+# unixuser_ssh_private_keys:
+#   cultclassik_rsa: !vault |
+#         $ANSIBLE_VAULT;1.1;AES256
+#         63853263323632396664333462316436333334306561343561393762343734666630633538616338
+#         3531643362663031303631623634636532333835396539300a346531303630613466643131323836
+#         63303436383438373138663133383666623235636666336161343339376362313462333234336435
+#         6334636439373631380a653861343136613335303663373030306664353837646161133961623235
+#         6261
+
+# unixuser_tmux_config:
+#   - "set -g default-shell {{ default_shell }}"
+#   - "set -g mouse on"
+#   - "set -g status-keys vi"
+
+unixuser_antigen_version: master
+unixuser_zsh_update_interval: 30 # set 0 for disable autoupdates
+unixuser_zsh_load_etc_profile: yes
+unixuser_zsh_autosuggestions_max_length: 15
+# zsh_autosuggestions_bind_key: ""
+# zsh_autosuggestions_bind_key_2: ""
+unixuser_path:
+  - /usr/local/opt/gnu-tar/libexec/gnubin
+  - /usr/local/sbin
+  - /usr/local/bin
+  - /usr/sbin
+  - /usr/bin
+  - /sbin
+  - /bin
+
+unixuser_antigen_bundles:
+  - { name: command-not-found, when: "{{ ansible_os_family != 'Darwin' }}" } # too slow on OSX
+  - { name: brew, command: brew }
+  - { name: docker, command: docker }
+  - { name: docker-compose, command: docker-compose }
+  - fancy-ctrl-z
+  - git-extras
+  - gnu-utils
+  - { name: httpie, command: http }
+  - { name: golang, command: go }
+  - { name: gulp, command: gulp }
+  - { name: helm, command: helm }
+  - { name: kubectl, command: kubectl }
+  - { name: pip, command: pip }
+  # - { name: rake, command: rake }
+  - { name: systemd, command: systemctl }
+  - python
+  - virtualenv
+  - { name: terraform, command: terraform }
+  - iterm2
+  - { name: tmux, command: tmux }
+  - { name: vagrant, command: vagrant }
+  # - { name: viasite/drall, command: drall }
+  # - { name: viasite/drupal-scripts, command: drs }
+  # - { name: viasite/server-scripts, command: dbdump }
+  # - { name: viasite-ansible/zsh-ansible-server, command: ansible-deploy }
+
+  # on zsh 4.3.10 autosuggestions breaks multiline commands with \
+  - { name: zsh-users/zsh-autosuggestions}
+  - { name: unixorn/autoupdate-antigen.zshplugin, when: "{{ unixuser_zsh_update_interval > 0 }}" }
+    # must be last, don't work on zsh < 4.3.17
+  #- { name: zsh-users/zsh-syntax-highlighting, when: "{{ zsh_version | default(false) is version_compare('4.3.17', '>=') }}" }
+  # bug with text paste in fast-syntax-highlighting v1.21, see https://github.com/zdharma/fast-syntax-highlighting/issues/30
+  - { name: zdharma/fast-syntax-highlighting@v1.2}
+
+unixuser_antigen_bundles_extras: []
+unixuser_brew_pkgs: []
+unixuser_brew_casks: []
+unixuser_apt_pkgs: []
