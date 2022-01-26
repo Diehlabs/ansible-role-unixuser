@@ -12,8 +12,8 @@
     content: "{{ item.value }}" #| base64 --decode }}"
     dest: "~{{ unixuser_user_id }}/.ssh/{{ item.key }}"
     owner: "{{ unixuser_user_id }}"
-    group: "{{ unixuser_primary_group }}"
+    group: "{{ unixuser_group_name }}"
     mode: 0600
   with_dict: "{{ unixuser_ssh_private_keys }}"
-  # no_log: true
+  no_log: true
   when: unixuser_ssh_private_keys is defined

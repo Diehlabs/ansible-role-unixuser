@@ -5,12 +5,16 @@ unixuser_user_id: "{{ user_id }}"
 
 unixuser_xtra_groups: []
 
-# unixuser_group_name:
+unixuser_group_name: "{{ unixuser_group_name_default[ansible_system] }}"
 
 unixuser_shell: /bin/zsh
 
 unixuser_profile_env_vars: []
-  # - "VAULT_ADDR=\"https://hcv.diehlabs.com\""
+  # - VAULT_ADDR=https://hcv.diehlabs.com
+
+# unixuser_iterm2_profile_file_content:
+# unixuser_p10k_file_content:
+# unixuser_rclocal_lines: []
 
 # unixuser_pub_ssh_keys:
 #   - https://github.com/cultclassik.keys

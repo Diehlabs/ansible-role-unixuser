@@ -8,9 +8,6 @@ fi
 export TERM="xterm-25color"
 export EDITOR="vim"
 export PATH="$PATH:{{ unixuser_path | join(":") }}"
-{% for env_var in unixuser_profile_env_vars %}
-    export {{ env_var }}
-{% endfor %}
 
 HIST_STAMPS="yyyy-mm-dd"
 UPDATE_ZSH_DAYS="{{ unixuser_zsh_update_interval }}"

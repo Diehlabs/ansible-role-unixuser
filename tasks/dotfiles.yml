@@ -4,40 +4,31 @@
     src: zshrc.j2
     dest: "{{ unixuser_zsh_config }}"
     owner: "{{ unixuser_user_id }}"
-    group: "{{ unixuser_primary_group }}"
+    group: "{{ unixuser_group_name }}"
     backup: yes
     mode: u=rw,g=r,o=r
 
-# - name: Add env vars to user .zprofile
-#   ansible.builtin.lineinfile:
-#     path: "~{{ unixuser_user_id }}/.zprofile"
-#     regexp: "^{{ item.split('=')[0] }}"
-#     line: "{{ item }}"
-#     create: yes
-#     owner: "{{ unixuser_user_id }}"
-#     group: "{{ unixuser_primary_group }}"
-#     mode: u=rw,g=r,o=r
-#   loop: "{{ zsh_zprofile_env_vars }}"
-#   when: (zsh_zprofile_env_vars is defined) and (zsh_zprofile_env_vars|length > 0)
-
-# - name: Add env vars to user .profile
-#   ansible.builtin.lineinfile:
-#     path: "~{{ unixuser_user_id }}/.profile"
-#     regexp: "^{{ item.split('=')[0] }}"
-#     line: "{{ item }}"
-#     create: yes
-#     owner: "{{ unixuser_user_id }}"
-#     group: "{{ unixuser_primary_group }}"
-#     mode: u=rw,g=r,o=r
-#   loop: "{{ unixuser_profile_env_vars }}"
-#   when: unixuser_profile_env_vars is defined
+# do this for bash as well - .bash_profile?
+- name: Write .zshrc.local config
+  ansible.builtin.blockinfile:
+    path: "~{{ unixuser_user_id }}/.zshrc.local"
+    create: yes
+    owner: "{{ unixuser_user_id }}"
+    group: "{{ unixuser_group_name }}"
+    mode: u=rw,g=r
+    marker: "# {mark} ANSIBLE MANAGED BLOCK - zshrc local file entries"
+    block: |
+      {% for line in unixuser_rclocal_lines %}
+      {{ line }}
+      {% endfor %}
+  when: unixuser_rclocal_lines is defined
 
 - name: Write .tmux.conf
   ansible.builtin.template:
     src: tmux.conf.j2
     dest: "~{{ unixuser_user_id }}/.tmux.conf"
     owner: "{{ unixuser_user_id }}"
-    group: "{{ unixuser_primary_group }}"
+    group: "{{ unixuser_group_name }}"
     backup: yes
     mode: u=rw,g=r,o=r
   when: ansible_system != 'Windows' # and unixuser_tmux_config is defined
