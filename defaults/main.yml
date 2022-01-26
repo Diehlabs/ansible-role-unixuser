@@ -28,6 +28,8 @@ unixuser_profile_env_vars: []
 #         6334636439373631380a653861343136613335303663373030306664353837646161133961623235
 #         6261
 
+# currently using a template instead of line/blockinfile so this var is not used
+# may switch back in the future to allow more flexibility
 # unixuser_tmux_config:
 #   - "set -g default-shell {{ default_shell }}"
 #   - "set -g mouse on"
