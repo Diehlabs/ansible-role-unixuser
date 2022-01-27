@@ -13,7 +13,6 @@ unixuser_antigen_path_compat: "{{ unixuser_antigen_path | replace('~' + unixuser
 unixuser_brew_pkgs_default:
 - zsh
 - zsh-completions
-- git
 - wget
 - gnu-tar
 
@@ -24,3 +23,6 @@ unixuser_apt_pkgs_default:
 - zsh
 - git
 - wget
+
+unixuser_rclocal_lines_default:
+- source ~/.p10k.zsh
