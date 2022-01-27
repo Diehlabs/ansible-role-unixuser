@@ -9,12 +9,13 @@
   become: no
   community.general.homebrew_cask:
     state: present
-    name: "{{ unixuser_brew_pkgs_default | union(unixuser_brew_pkgs) }}"
+    name: "{{ unixuser_brew_casks_default | union(unixuser_brew_casks) }}"
 
 - name: Create iTerm2 profile
   ansible.builtin.copy:
     src: iterm2_profile.json
     dest: "~/Library/Application Support/iTerm2/DynamicProfiles/{{ unixuser_user_id }}-profile.json"
     owner: "{{ unixuser_user_id }}"
-    group: "{{ unixuser_primary_group }}"
+    group: "{{ unixuser_group_name }}"
     mode: u=rw,g=rw,o=rw
+  when: unixuser_iterm2_profile_file_content is defined

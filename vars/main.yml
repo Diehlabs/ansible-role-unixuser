@@ -1,9 +1,7 @@
 ---
 # vars file for unixuser
 
-unixuser_primary_group: "{{ unixuser_group_name | default(unixuser_primary_group_default[ ansible_system ]) }}"
-
-unixuser_primary_group_default:
+unixuser_group_name_default:
   Darwin: admin
   Linux: "{{ user_id }}"
   Windows:
@@ -15,7 +13,6 @@ unixuser_antigen_path_compat: "{{ unixuser_antigen_path | replace('~' + unixuser
 unixuser_brew_pkgs_default:
 - zsh
 - zsh-completions
-- git
 - wget
 - gnu-tar
 
@@ -26,3 +23,6 @@ unixuser_apt_pkgs_default:
 - zsh
 - git
 - wget
+
+unixuser_rclocal_lines_default:
+- source ~/.p10k.zsh
