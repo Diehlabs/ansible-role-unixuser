@@ -13,7 +13,7 @@
 
 - name: Create iTerm2 profile
   ansible.builtin.copy:
-    src: iterm2_profile.json
+    content: unixuser_iterm2_profile_file_content
     dest: "~/Library/Application Support/iTerm2/DynamicProfiles/{{ unixuser_user_id }}-profile.json"
     owner: "{{ unixuser_user_id }}"
     group: "{{ unixuser_group_name }}"
