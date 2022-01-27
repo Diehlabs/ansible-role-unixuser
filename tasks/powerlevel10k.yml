@@ -1,9 +1,17 @@
 ---
-# - name: Install Meso fonts
-# - https://github.com/romkatv/powerlevel10k-media/raw/master/MesloLGS%20NF%20Regular.ttf
-# - https://github.com/romkatv/powerlevel10k-media/raw/master/MesloLGS%20NF%20Bold.ttf
-# - https://github.com/romkatv/powerlevel10k-media/raw/master/MesloLGS%20NF%20Italic.ttf
-# - https://github.com/romkatv/powerlevel10k-media/raw/master/MesloLGS%20NF%20Bold%20Italic.ttf
+- name: Install Meso fonts
+  ansible.builtin.get_url:
+    url: "https://github.com/romkatv/powerlevel10k-media/raw/master/{{ item }}"
+    dest: "~/Library/Fonts"
+    owner: "{{ unixuser_user_id }}"
+    group: "{{ unixuser_group_name }}"
+    mode: u=rw,g=r,o=r
+  loop:
+    - 'MesloLGS N Regular.ttf'
+    - 'MesloLGS NF Bold.ttf'
+    - 'MesloLGS NF Italic.ttf'
+    - 'MesloLGS NF Bold Italic.ttf'
+
 
 - name: Create Powerlevel 10k config
   ansible.builtin.copy:
