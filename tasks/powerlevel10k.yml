@@ -7,7 +7,7 @@
     group: "{{ unixuser_group_name }}"
     mode: u=rw,g=r,o=r
   loop:
-    - 'MesloLGS N Regular.ttf'
+    - 'MesloLGS NF Regular.ttf'
     - 'MesloLGS NF Bold.ttf'
     - 'MesloLGS NF Italic.ttf'
     - 'MesloLGS NF Bold Italic.ttf'
