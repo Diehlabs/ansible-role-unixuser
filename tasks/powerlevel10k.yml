@@ -1,7 +1,7 @@
 ---
 - name: Install Meso fonts
   ansible.builtin.get_url:
-    url: "https://github.com/romkatv/powerlevel10k-media/raw/master/{{ item }}"
+    url: "https://github.com/romkatv/powerlevel10k-media/raw/master/{{ urlencode(item) }}"
     dest: "~/Library/Fonts/{{ item }}"
     owner: "{{ unixuser_user_id }}"
     group: "{{ unixuser_group_name }}"
