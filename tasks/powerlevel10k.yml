@@ -1,4 +1,12 @@
 ---
+- name: Ensure user fonts folder exits
+  ansible.builtin.file:
+    path: "~/Library/Fonts/"
+    owner: "{{ unixuser_user_id }}"
+    group: "{{ unixuser_group_name }}"
+    mode: u=rwx,g=rx,o=rx
+    state: directory
+
 - name: Install Meso fonts
   ansible.builtin.get_url:
     url: "https://github.com/romkatv/powerlevel10k-media/raw/master/{{ item | urlencode }}"
