@@ -1,4 +1,4 @@
-# {{ ansible_managed }}
+# {{ unixuser_managed_by_string }}
 # antigen version: {{ unixuser_antigen_installed_version }}
 
 if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
@@ -13,7 +13,7 @@ HIST_STAMPS="yyyy-mm-dd"
 UPDATE_ZSH_DAYS="{{ unixuser_zsh_update_interval }}"
 COMPLETION_WAITING_DOTS="true"
 
-# ADOTDIR="{{ unixuser_antigen_path_compat }}"
+ADOTDIR="{{ unixuser_antigen_path_compat }}"
 ANTIGEN_BUNDLES="{{ unixuser_antigen_path_compat }}/bundles"
 ANTIGEN_PLUGIN_UPDATE_DAYS="{{ unixuser_zsh_update_interval }}"
 ANTIGEN_SYSTEM_UPDATE_DAYS="{{ unixuser_zsh_update_interval }}"
@@ -75,7 +75,7 @@ autoload -Uz copy-earlier-word
 zle -N copy-earlier-word
 
 {# # hotkeys
-{% for hotkey in zsh_hotkeys %}
+{% for hotkey in unixuser_zsh_hotkeys | combine(unixuser_zsh_hotkeys_extras) %}
 {% if hotkey.hotkey != '' and (hotkey.bundle is not defined or hotkey.bundle in bundles_enabled) %}
 bindkey '{{ hotkey.hotkey }}' {{ hotkey.action }}
 {% endif %}
@@ -90,7 +90,8 @@ alias '{{ alias.alias }}'="{{ alias.action }}"
 
 # zsh-autosuggestions
 ZSH_AUTOSUGGEST_BUFFER_MAX_SIZE={{ unixuser_zsh_autosuggestions_max_length }}
-ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE="fg=240" # gray highlight
+#ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE="fg=240" # gray highlight
+ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE="fg=#ff00ff,bg=cyan,bold,underline"
 
 # Aliases
 alias suser='su -'

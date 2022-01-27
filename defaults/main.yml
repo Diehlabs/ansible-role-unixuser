@@ -39,8 +39,10 @@ unixuser_antigen_version: master
 unixuser_zsh_update_interval: 30 # set 0 for disable autoupdates
 unixuser_zsh_load_etc_profile: yes
 unixuser_zsh_autosuggestions_max_length: 15
-# zsh_autosuggestions_bind_key: ""
-# zsh_autosuggestions_bind_key_2: ""
+unixuser_zsh_autosuggestions_bind_key: ""
+unixuser_zsh_autosuggestions_bind_key_2: ""
+
+
 unixuser_path:
   - /usr/local/opt/gnu-tar/libexec/gnubin
   - /usr/local/sbin
@@ -86,6 +88,8 @@ unixuser_antigen_bundles:
   - { name: zdharma/fast-syntax-highlighting@v1.2}
 
 unixuser_antigen_bundles_extras: []
+unixuser_zsh_hotkeys_extras: []
+
 unixuser_brew_pkgs: []
 unixuser_brew_casks: []
 unixuser_apt_pkgs: []

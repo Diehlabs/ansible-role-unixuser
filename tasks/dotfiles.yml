@@ -1,13 +1,4 @@
 ---
-- name: Write .zshrc config
-  ansible.builtin.template:
-    src: zshrc.j2
-    dest: "{{ unixuser_zsh_config }}"
-    owner: "{{ unixuser_user_id }}"
-    group: "{{ unixuser_group_name }}"
-    backup: yes
-    mode: u=rw,g=r,o=r
-
 # do this for bash as well - .bash_profile?
 - name: Write .zshrc.local config
   ansible.builtin.blockinfile:

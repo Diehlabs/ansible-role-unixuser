@@ -1,6 +1,8 @@
 ---
 # vars file for unixuser
 
+unixuser_managed_by_string: Managed by Ansible role ansible-role-unixuser
+
 unixuser_group_name_default:
   Darwin: admin
   Linux: "{{ user_id }}"
@@ -25,3 +27,8 @@ unixuser_apt_pkgs_default:
 - wget
 
 unixuser_rclocal_lines_default:
+
+unixuser_zsh_hotkeys:
+  # home & end keys work
+  - { hotkey: '\e[1~', action: beginning-of-line }
+  - { hotkey: '\e[4~', action: end-of-line }
