@@ -25,4 +25,3 @@ unixuser_apt_pkgs_default:
 - wget
 
 unixuser_rclocal_lines_default:
-- source ~/.p10k.zsh

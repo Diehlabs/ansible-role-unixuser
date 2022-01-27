@@ -89,3 +89,8 @@ unixuser_antigen_bundles_extras: []
 unixuser_brew_pkgs: []
 unixuser_brew_casks: []
 unixuser_apt_pkgs: []
+
+tmux_conf_lines:
+- "set -g default-shell {{ unixuser_shell | default('/bin/zsh') }}"
+- set -g mouse on
+- set -g status-keys vi
