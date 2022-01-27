@@ -59,3 +59,12 @@
   become_user: "{{ unixuser_user_id }}"
   changed_when: false
   failed_when: false
+
+- name: Write .zshrc config
+  ansible.builtin.template:
+    src: zshrc.j2
+    dest: "{{ unixuser_zsh_config }}"
+    owner: "{{ unixuser_user_id }}"
+    group: "{{ unixuser_group_name }}"
+    backup: yes
+    mode: u=rw,g=r,o=r

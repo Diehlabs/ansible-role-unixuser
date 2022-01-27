@@ -1,13 +1,4 @@
 ---
-- name: Write .zshrc config
-  ansible.builtin.template:
-    src: zshrc.j2
-    dest: "{{ unixuser_zsh_config }}"
-    owner: "{{ unixuser_user_id }}"
-    group: "{{ unixuser_group_name }}"
-    backup: yes
-    mode: u=rw,g=r,o=r
-
 # do this for bash as well - .bash_profile?
 - name: Write .zshrc.local config
   ansible.builtin.blockinfile:
@@ -15,8 +6,8 @@
     create: yes
     owner: "{{ unixuser_user_id }}"
     group: "{{ unixuser_group_name }}"
-    mode: u=rw,g=r
-    marker: "# {mark} ANSIBLE MANAGED BLOCK - zshrc local file entries"
+    mode: u=rw,g=r,o=r
+    marker: "# {mark} ---------------- ANSIBLE MANAGED BLOCK - zshrc local file entries"
     block: |
       {% for line in unixuser_rclocal_lines %}
       {{ line }}
@@ -24,11 +15,15 @@
   when: unixuser_rclocal_lines is defined
 
 - name: Write .tmux.conf
-  ansible.builtin.template:
-    src: tmux.conf.j2
-    dest: "~{{ unixuser_user_id }}/.tmux.conf"
+  ansible.builtin.blockinfile:
+    path: "~{{ unixuser_user_id }}/.tmux.conf"
+    create: yes
     owner: "{{ unixuser_user_id }}"
     group: "{{ unixuser_group_name }}"
-    backup: yes
     mode: u=rw,g=r,o=r
-  when: ansible_system != 'Windows' # and unixuser_tmux_config is defined
+    marker: "# {mark} ---------------- ANSIBLE MANAGED BLOCK - tmux conf file entries"
+    block: |
+      {% for line in tmux_conf_lines %}
+      {{ line }}
+      {% endfor %}
+  when: tmux_conf_lines is defined
