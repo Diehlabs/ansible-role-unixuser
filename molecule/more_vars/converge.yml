@@ -1,0 +1,18 @@
+---
+- name: Converge
+  hosts: all
+  vars:
+    user_id: chris
+    unixuser_p10k_file_content: 'echo "hello world"'
+    unixuser_rclocal_lines:
+      - export MY_TEST_VAR="my test value"
+    unixuser_pub_ssh_keys:
+      - https://github.com/cultclassik.keys
+    unixuser_apt_pkgs:
+      - netcat
+      - jq
+    
+  tasks:
+    - name: "Include unixuser"
+      include_role:
+        name: "ansible-role-unixuser"
