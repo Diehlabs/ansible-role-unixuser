@@ -3,15 +3,15 @@
   hosts: all
   vars:
     user_id: chris
-    unixuser_p10k_file_content: 'echo "hello world"'
     unixuser_rclocal_lines:
-      - export MY_TEST_VAR="my test value"
+      - export MY_TEST_VAR=ansible
     unixuser_pub_ssh_keys:
       - https://github.com/cultclassik.keys
     unixuser_apt_pkgs:
       - netcat
       - jq
-    
+    unixuser_p10k_file_content: "{{ lookup('url', 'https://raw.githubusercontent.com/CultClassik/my-dot-files/main/.p10k.zsh', split_lines=False) }}"
+
   tasks:
     - name: "Include unixuser"
       include_role:
