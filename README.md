@@ -1,5 +1,5 @@
 # ansible-role-unixuser
-[![Ansible Lint](https://github.com/Diehlabs/ansible-role-unixuser/actions/workflows/test.yml/badge.svg)](https://github.com/Diehlabs/ansible-role-unixuser/actions/workflows/test.yml)
+[![Ansible CI](https://github.com/Diehlabs/ansible-role-unixuser/actions/workflows/ci.yml/badge.svg)](https://github.com/Diehlabs/ansible-role-unixuser/actions/workflows/ci.yml)
 =========
 Ansible role for my user configuration - Repo managed by Terraform repo terraform-vault-diehlabs (azdo)
 

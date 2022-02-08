@@ -2,7 +2,7 @@ name: Ansible Release
 on:
   workflow_run:
     workflows:
-      - 'Ansible Test'
+      - 'Ansible CI'
     branches:
       - main
     types:
