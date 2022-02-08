@@ -5,6 +5,12 @@
   hosts: all
   gather_facts: false
   tasks:
-  - name: Example assertion
+  - name: Read ENV var
+    ansible.builtin.command:
+      cmd: grep MY_TEST_VAR /home/chris/.zshrc.local
+    register: env_var_output
+    changed_when: False
+
+  - name: Assert .zshrc.local contains expected value
     assert:
-      that: true
+      that: env_var_output.stdout == "export MY_TEST_VAR=ansible"

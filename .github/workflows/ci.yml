@@ -15,4 +15,4 @@ jobs:
   all_vars:
     uses: Diehlabs/shared-workflows/.github/workflows/ansible-ci.yml@v0.0.3
     with:
-      scenario: all_vars
+      scenario: more_vars

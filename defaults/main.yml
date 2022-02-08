@@ -64,7 +64,7 @@ unixuser_antigen_bundles:
   - { name: gulp, command: gulp }
   - { name: helm, command: helm }
   - { name: kubectl, command: kubectl }
-  - { name: pip, command: pip }
+  - { name: pip, command: pip3 }
   # - { name: rake, command: rake }
   - { name: systemd, command: systemctl }
   - python
@@ -73,18 +73,9 @@ unixuser_antigen_bundles:
   - iterm2
   - { name: tmux, command: tmux }
   - { name: vagrant, command: vagrant }
-  # - { name: viasite/drall, command: drall }
-  # - { name: viasite/drupal-scripts, command: drs }
-  # - { name: viasite/server-scripts, command: dbdump }
-  # - { name: viasite-ansible/zsh-ansible-server, command: ansible-deploy }
-
-  # on zsh 4.3.10 autosuggestions breaks multiline commands with \
   - { name: zsh-users/zsh-autosuggestions}
   - { name: unixorn/autoupdate-antigen.zshplugin, when: "{{ unixuser_zsh_update_interval > 0 }}" }
-    # must be last, don't work on zsh < 4.3.17
-  #- { name: zsh-users/zsh-syntax-highlighting, when: "{{ zsh_version | default(false) is version_compare('4.3.17', '>=') }}" }
-  # bug with text paste in fast-syntax-highlighting v1.21, see https://github.com/zdharma/fast-syntax-highlighting/issues/30
-  - { name: zdharma/fast-syntax-highlighting@v1.2}
+  - { name: zantigen bundle zdharma-continuum/fast-syntax-highlighting }
 
 unixuser_antigen_bundles_extras: []
 unixuser_zsh_hotkeys_extras: []
