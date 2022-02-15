@@ -88,7 +88,7 @@ ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE="fg=240" # gray highlight
 {% if unixuser_zsh_load_etc_profile %}source /etc/profile{% endif %}
 
 # enable autocomplete, autocomplete dot files
-autoload -Uz compinit; compinit; _comp_options+=(globdots;
+autoload -Uz compinit; compinit; _comp_options+=(globdots);
 
 # user configs
 [[ -r /etc/zsh/zshrc.local ]] && source /etc/zsh/zshrc.local

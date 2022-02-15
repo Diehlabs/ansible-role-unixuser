@@ -12,7 +12,7 @@
       {% for line in unixuser_rclocal_lines %}
       {{ line }}
       {% endfor %}
-  when: unixuser_rclocal_lines is defined
+  when: unixuser_rclocal_lines is defined and unixuser_rclocal_lines|length > 0
 
 - name: Write .zshenv config block
   ansible.builtin.blockinfile:
@@ -26,12 +26,10 @@
       {% for line in unixuser_zshenv_lines %}
       {{ line }}
       {% endfor %}
-  when: unixuser_zshenv_lines is defined
+  when: unixuser_zshenv_lines is defined and unixuser_zshenv_lines|length > 0
 
 # $ZDOTDIR/.zshenv
 # $ZDOTDIR/.zprofile
 # $ZDOTDIR/.zshrc
-#
-
 # $ZDOTDIR/.zlogin
 # $ZDOTDIR/.zlogout
