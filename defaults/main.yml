@@ -9,12 +9,18 @@ unixuser_group_name: "{{ unixuser_group_name_default[ansible_system] }}"
 
 unixuser_shell: /bin/zsh
 
-unixuser_profile_env_vars: []
-  # - VAULT_ADDR=https://hcv.diehlabs.com
+# list(string)
+unixuser_rclocal_lines: []
 
-# unixuser_iterm2_profile_file_content:
+# list(string)
+unixuser_zshenv_lines: []
+
+# list(string)
+unixuser_aliases_extras: []
+
+unixuser_iterm2_profile_file_content:
+
 # unixuser_p10k_file_content:
-# unixuser_rclocal_lines: []
 
 # unixuser_pub_ssh_keys:
 #   - https://github.com/cultclassik.keys
@@ -27,13 +33,6 @@ unixuser_profile_env_vars: []
 #         63303436383438373138663133383666623235636666336161343339376362313462333234336435
 #         6334636439373631380a653861343136613335303663373030306664353837646161133961623235
 #         6261
-
-# currently using a template instead of line/blockinfile so this var is not used
-# may switch back in the future to allow more flexibility
-# unixuser_tmux_config:
-#   - "set -g default-shell {{ default_shell }}"
-#   - "set -g mouse on"
-#   - "set -g status-keys vi"
 
 unixuser_antigen_version: master
 unixuser_zsh_update_interval: 30 # set 0 for disable autoupdates
@@ -83,8 +82,3 @@ unixuser_zsh_hotkeys_extras: []
 unixuser_brew_pkgs: []
 unixuser_brew_casks: []
 unixuser_apt_pkgs: []
-
-tmux_conf_lines:
-- "set -g default-shell {{ unixuser_shell | default('/bin/zsh') }}"
-- set -g mouse on
-- set -g status-keys vi

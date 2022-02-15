@@ -5,6 +5,8 @@
     user_id: chris
     unixuser_rclocal_lines:
       - export MY_TEST_VAR=ansible
+    unixuser_zshenv_lines:
+      - export MY_FILE=zshenv
     unixuser_pub_ssh_keys:
       - https://github.com/cultclassik.keys
     unixuser_apt_pkgs:

@@ -1,6 +1,6 @@
 ---
 # do this for bash as well - .bash_profile?
-- name: Write .zshrc.local config
+- name: Write .zshrc.local block
   ansible.builtin.blockinfile:
     path: "~{{ unixuser_user_id }}/.zshrc.local"
     create: yes
@@ -14,16 +14,24 @@
       {% endfor %}
   when: unixuser_rclocal_lines is defined
 
-- name: Write .tmux.conf
+- name: Write .zshenv config block
   ansible.builtin.blockinfile:
-    path: "~{{ unixuser_user_id }}/.tmux.conf"
+    path: "~{{ unixuser_user_id }}/.zshenv"
     create: yes
     owner: "{{ unixuser_user_id }}"
     group: "{{ unixuser_group_name }}"
     mode: u=rw,g=r,o=r
-    marker: "# {mark} ---------------- ANSIBLE MANAGED BLOCK - tmux conf file entries"
+    marker: "# {mark} ---------------- ANSIBLE MANAGED BLOCK - zshenv file entries"
     block: |
-      {% for line in tmux_conf_lines %}
+      {% for line in unixuser_zshenv_lines %}
       {{ line }}
       {% endfor %}
-  when: tmux_conf_lines is defined
+  when: unixuser_zshenv_lines is defined
+
+# $ZDOTDIR/.zshenv
+# $ZDOTDIR/.zprofile
+# $ZDOTDIR/.zshrc
+#
+
+# $ZDOTDIR/.zlogin
+# $ZDOTDIR/.zlogout
