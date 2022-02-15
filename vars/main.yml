@@ -12,23 +12,32 @@ unixuser_antigen_path: "~{{ unixuser_user_id }}/.antigen"
 unixuser_zsh_config: "~{{ unixuser_user_id }}/.zshrc"
 unixuser_antigen_path_compat: "{{ unixuser_antigen_path | replace('~' + unixuser_user_id, '$HOME') }}"
 
+unixuser_zsh_hotkeys:
+  - { hotkey: "^A", action: beginning-of-line }
+  - { hotkey: "^E", action: end-of-line }
+  - { hotkey: "^K", action: kill-line }
+  - { hotkey: "^R", action: history-incremental-search-backward }
+  - { hotkey: "^P", action: history-search-backward }
+  - { hotkey: "^Y", action: accept-and-hold }
+  - { hotkey: "^N", action: insert-last-word }
+  - { hotkey: "^Q", action: push-line-or-edit }
+# bindkey -s "^T"  # home & end keys work
+# - { hotkey: '\e[1~', action: beginning-of-line }
+# - { hotkey: '\e[4~', action: end-of-line } "^[Isudo ^[A" # "t" for "toughguy"
+
+unixuser_aliases:
+  - { alias: 'suser', action: 'su -' }
+
 unixuser_brew_pkgs_default:
-- zsh
-- zsh-completions
-- wget
-- gnu-tar
+  - zsh
+  - zsh-completions
+  - wget
+  - gnu-tar
 
 unixuser_brew_casks_default:
-- iterm2
+  - iterm2
 
 unixuser_apt_pkgs_default:
-- zsh
-- git
-- wget
-
-unixuser_rclocal_lines_default:
-
-unixuser_zsh_hotkeys:
-  # home & end keys work
-  - { hotkey: '\e[1~', action: beginning-of-line }
-  - { hotkey: '\e[4~', action: end-of-line }
+  - zsh
+  - git
+  - wget
