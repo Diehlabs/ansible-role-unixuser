@@ -6,7 +6,6 @@ unixuser_managed_by_string: Managed by Ansible role ansible-role-unixuser
 unixuser_group_name_default:
   Darwin: admin
   Linux: "{{ user_id }}"
-  Windows:
 
 unixuser_antigen_path: "~{{ unixuser_user_id }}/.antigen"
 unixuser_zsh_config: "~{{ unixuser_user_id }}/.zshrc"
@@ -21,9 +20,9 @@ unixuser_zsh_hotkeys:
   - { hotkey: "^Y", action: accept-and-hold }
   - { hotkey: "^N", action: insert-last-word }
   - { hotkey: "^Q", action: push-line-or-edit }
-# bindkey -s "^T"  # home & end keys work
-# - { hotkey: '\e[1~', action: beginning-of-line }
-# - { hotkey: '\e[4~', action: end-of-line } "^[Isudo ^[A" # "t" for "toughguy"
+    # home & end keys work
+  - { hotkey: '\e[1~', action: beginning-of-line }
+  - { hotkey: '\e[4~', action: end-of-line }
 
 unixuser_aliases:
   - { alias: 'suser', action: 'su -' }

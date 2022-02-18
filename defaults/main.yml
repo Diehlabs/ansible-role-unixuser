@@ -70,7 +70,7 @@ unixuser_antigen_bundles:
   - virtualenv
   - { name: terraform, command: terraform }
   - iterm2
-  - { name: tmux, command: tmux }
+  - { name: tmux }
   - { name: vagrant, command: vagrant }
   - { name: zsh-users/zsh-autosuggestions}
   - { name: unixorn/autoupdate-antigen.zshplugin, when: "{{ unixuser_zsh_update_interval > 0 }}" }
