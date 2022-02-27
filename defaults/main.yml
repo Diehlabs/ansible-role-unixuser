@@ -9,6 +9,8 @@ unixuser_group_name: "{{ unixuser_group_name_default[ansible_system] }}"
 
 unixuser_shell: /bin/zsh
 
+unixuser_default_bat: yes
+
 # list(string)
 unixuser_rclocal_lines: []
 

@@ -29,6 +29,7 @@ unixuser_aliases:
   - { alias: 'suser', action: 'su -' }
 
 unixuser_brew_pkgs_default:
+  - bat
   - zsh
   - zsh-completions
   - wget
@@ -41,3 +42,4 @@ unixuser_apt_pkgs_default:
   - zsh
   - git
   - wget
+  - bat
