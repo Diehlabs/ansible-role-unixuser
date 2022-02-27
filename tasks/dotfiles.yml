@@ -28,7 +28,7 @@
       {% endfor %}
       {% if unixuser_default_bat == 'yes' %}
       alias cat=bat
-      {% end if %}
+      {% endif %}
   when: unixuser_zshenv_lines is defined and unixuser_zshenv_lines|length > 0
 
 # $ZDOTDIR/.zshenv
