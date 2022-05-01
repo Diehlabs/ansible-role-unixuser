@@ -1,2 +1,8 @@
 ---
 # handlers file for unixuser
+- name: Update font cache
+  ansible.builtin.shell: |
+    fc-cache -f -v
+  args:
+    executable: /bin/bash
+  when: ansible_system == 'Linux'

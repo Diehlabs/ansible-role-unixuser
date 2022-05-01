@@ -1,7 +1,7 @@
 ---
 - name: Ensure user fonts folder exits
   ansible.builtin.file:
-    path: "~/Library/Fonts/"
+    path: "{{ unixuser_font_folder }}"
     owner: "{{ unixuser_user_id }}"
     group: "{{ unixuser_group_name }}"
     mode: u=rwx,g=rx,o=rx
@@ -10,7 +10,7 @@
 - name: Install Meso fonts
   ansible.builtin.get_url:
     url: "https://github.com/romkatv/powerlevel10k-media/raw/master/{{ item | urlencode }}"
-    dest: "~/Library/Fonts/{{ item }}"
+    dest: "{{ unixuser_font_folder }}/{{ item }}"
     owner: "{{ unixuser_user_id }}"
     group: "{{ unixuser_group_name }}"
     mode: u=rw,g=r,o=r
@@ -19,6 +19,7 @@
     - 'MesloLGS NF Bold.ttf'
     - 'MesloLGS NF Italic.ttf'
     - 'MesloLGS NF Bold Italic.ttf'
+  notify: Update font cache
 
 - name: Create Powerlevel 10k config
   ansible.builtin.copy:

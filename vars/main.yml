@@ -5,7 +5,11 @@ unixuser_managed_by_string: Managed by Ansible role ansible-role-unixuser
 
 unixuser_group_name_default:
   Darwin: admin
-  Linux: "{{ user_id }}"
+  Linux: "{{ unixuser_user_id}}"
+
+unixuser_font_folder_default:
+  Dawrin: "/Users/{{ unixuser_user_id }}/Library/Fonts"
+  Linux: "/home/{{ unixuser_user_id }}/.local/share/fonts"
 
 unixuser_antigen_path: "~{{ unixuser_user_id }}/.antigen"
 unixuser_zsh_config: "~{{ unixuser_user_id }}/.zshrc"
@@ -41,4 +45,5 @@ unixuser_apt_pkgs_default:
   - zsh
   - git
   - wget
+  - fontconfig
   - bat

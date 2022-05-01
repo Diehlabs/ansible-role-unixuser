@@ -43,6 +43,8 @@ unixuser_zsh_autosuggestions_max_length: 15
 unixuser_zsh_autosuggestions_bind_key: ""
 unixuser_zsh_autosuggestions_bind_key_2: ""
 
+unixuser_font_folder: "{{ unixuser_font_folder_default[ansible_system] }}"
+
 unixuser_path:
   - /usr/local/opt/gnu-tar/libexec/gnubin
   - /usr/local/sbin
