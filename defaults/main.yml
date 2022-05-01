@@ -45,14 +45,7 @@ unixuser_zsh_autosuggestions_bind_key_2: ""
 
 unixuser_font_folder: "{{ unixuser_font_folder_default[ansible_system] }}"
 
-unixuser_path:
-  - /usr/local/opt/gnu-tar/libexec/gnubin
-  - /usr/local/sbin
-  - /usr/local/bin
-  - /usr/sbin
-  - /usr/bin
-  - /sbin
-  - /bin
+unixuser_path: "{{ unixuser_path_default[ansible_system] }}"
 
 unixuser_antigen_bundles:
   - { name: command-not-found, when: "{{ ansible_os_family != 'Darwin' }}" } # too slow on OSX
