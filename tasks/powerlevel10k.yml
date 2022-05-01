@@ -19,6 +19,7 @@
     - 'MesloLGS NF Bold.ttf'
     - 'MesloLGS NF Italic.ttf'
     - 'MesloLGS NF Bold Italic.ttf'
+  notify: Update font cache
 
 - name: Create Powerlevel 10k config
   ansible.builtin.copy:
