@@ -44,3 +44,4 @@ unixuser_apt_pkgs_default:
   - zsh
   - git
   - wget
+  - fontconfig
