@@ -24,32 +24,33 @@ antigen use oh-my-zsh
 
 {% set bundles_enabled = [] %}
 {% for bundle in unixuser_antigen_bundles -%}
-  {%- if bundle is mapping -%}
-    {% set valid = true -%}
-    {% set command_not_exists = [] -%}
-    {%- if bundle.when is defined and not bundle.when -%}
-      {% set valid = false -%}
-    {% endif -%}
+    {%- if bundle is mapping -%}
+        {% set valid = true -%}
+        {% set command_not_exists = [] -%}
 
-    {% if bundle.command is defined -%}
-      {% for cmd in zsh_register_commands_exists.results -%}
-        {% if cmd.cmd is defined and cmd.rc != 0 and cmd.item.command == bundle.command -%}
-          {% if command_not_exists.append(1) %}{% endif -%}
+        {%- if bundle.when is defined and not bundle.when -%}
+            {% set valid = false -%}
         {% endif -%}
-      {% endfor -%}
-    {% endif -%}
 
-    {% if valid and not command_not_exists %}
-      {%- if 'zsh-syntax-highlighting' in bundle.name or 'fast-syntax-highlighting' in bundle.name -%}
-      {% else -%}
-      {% if bundles_enabled.append(bundle.name) %}{% endif -%}
-        antigen bundle {{ bundle.name }}
-      {% endif -%}
-    {% endif -%}
-  {%- else -%}
-    {% if bundles_enabled.append(bundle) %}{% endif -%}
-    antigen bundle {{ bundle }}
-  {% endif %}
+        {% if bundle.command is defined -%}
+            {% for cmd in zsh_register_commands_exists.results -%}
+                {% if cmd.cmd is defined and cmd.rc != 0 and cmd.item.command == bundle.command -%}
+                    {% if command_not_exists.append(1) %}{% endif -%}
+                {% endif -%}
+            {% endfor -%}
+        {% endif -%}
+
+        {% if valid and not command_not_exists %}
+            {%- if 'zsh-syntax-highlighting' in bundle.name or 'fast-syntax-highlighting' in bundle.name -%}
+{% else -%}
+{% if bundles_enabled.append(bundle.name) %}{% endif -%}
+antigen bundle {{ bundle.name }}
+{% endif -%}
+        {% endif -%}
+    {%- else -%}
+{% if bundles_enabled.append(bundle) %}{% endif -%}
+antigen bundle {{ bundle }}
+{% endif %}
 {% endfor %}
 
 POWERLEVEL9K_INSTALLATION_PATH=$ANTIGEN_BUNDLES/bhilburn/powerlevel9k/powerlevel9k.zsh-theme
