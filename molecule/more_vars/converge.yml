@@ -12,9 +12,9 @@
     unixuser_apt_pkgs:
       - netcat
       - jq
-    unixuser_p10k_file_content: "{{ lookup('url', 'https://raw.githubusercontent.com/CultClassik/my-dot-files/main/.p10k.zsh', split_lines=False) }}"
+    unixuser_p10k_file_content: "#!/bin/zsh"
 
   tasks:
     - name: "Include unixuser"
-      include_role:
+      ansible.builtin.include_role:
         name: "ansible-role-unixuser"

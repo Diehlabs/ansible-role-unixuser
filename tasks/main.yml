@@ -10,27 +10,27 @@
   tags: [ base ]
 
 - name: Debian specific
-  include_tasks: debian.yml
+  ansible.builtin.include_tasks: debian.yml
   when: ansible_os_family == 'Debian'
   tags: [ base ]
 
 - name: OSX specific
-  include_tasks: osx.yml
+  ansible.builtin.include_tasks: osx.yml
   when: ansible_os_family == 'Darwin'
   tags: [ base ]
 
 - name: SSH keys
-  include_tasks: ssh_keys.yml
+  ansible.builtin.include_tasks: ssh_keys.yml
   tags: [ ssh ]
 
 - name: Antigen
-  include_tasks: antigen.yml
+  ansible.builtin.include_tasks: antigen.yml
   tags: [ antigen ]
 
 - name: Powerlevel 10k
-  include_tasks: powerlevel10k.yml
+  ansible.builtin.include_tasks: powerlevel10k.yml
   tags: [ antigen, p10k ]
 
 - name: dot files
-  include_tasks: dotfiles.yml
+  ansible.builtin.include_tasks: dotfiles.yml
   tags: [ base, dot ]

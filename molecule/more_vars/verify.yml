@@ -12,5 +12,5 @@
     changed_when: False
 
   - name: Assert .zshrc.local contains expected value
-    assert:
+    ansible.builtin.assert:
       that: env_var_output.stdout == "export MY_TEST_VAR=ansible"
