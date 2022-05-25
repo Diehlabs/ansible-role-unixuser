@@ -2,7 +2,6 @@ galaxy_info:
   author: Chris Diehl
   description: Configures user account
   company: Diehlabs
-  namespace: diehlabs
   role_name: unixuser
   license: MIT
 
