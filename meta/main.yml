@@ -2,8 +2,9 @@ galaxy_info:
   author: Chris Diehl
   description: Configures user account
   company: Diehlabs
-  role_name: unixuser
   license: MIT
+  namespace: diehlabs
+  role_name: unixuser
 
   min_ansible_version: '2.9'
 
