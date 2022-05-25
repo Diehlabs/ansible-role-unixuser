@@ -12,7 +12,7 @@ repos:
       - id: end-of-file-fixer
 
   - repo: https://github.com/ansible-community/ansible-lint.git
-    rev: v5.3.2  # put latest release tag from https://github.com/ansible-community/ansible-lint/releases/
+    rev: v6.2.1  # put latest release tag from https://github.com/ansible-community/ansible-lint/releases/
     hooks:
       - id: ansible-lint
         files: \.(yaml|yml)$
