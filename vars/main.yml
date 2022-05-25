@@ -8,11 +8,11 @@ unixuser_group_name_default:
   Linux: "{{ unixuser_user_id }}"
 
 unixuser_font_folder_default:
-  Dawrin: "/Users/{{ unixuser_user_id }}/Library/Fonts"
+  Darwin: "/Users/{{ unixuser_user_id }}/Library/Fonts"
   Linux: "/home/{{ unixuser_user_id }}/.local/share/fonts"
 
 unixuser_path_default:
-  Dawrin:
+  Darwin:
     - "/Users/{{ unixuser_user_id }}/.local/bin"
     - /usr/local/opt/gnu-tar/libexec/gnubin
     - /usr/local/sbin
@@ -52,17 +52,17 @@ unixuser_aliases:
 
 unixuser_brew_pkgs_default:
   - bat
+  - gnu-tar
+  - wget
   - zsh
   - zsh-completions
-  - wget
-  - gnu-tar
 
 unixuser_brew_casks_default:
   - iterm2
 
 unixuser_apt_pkgs_default:
-  - zsh
+  - bat
+  - fontconfig
   - git
   - wget
-  - fontconfig
-  - bat
+  - zsh
