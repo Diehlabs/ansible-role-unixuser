@@ -1,7 +1,7 @@
 name: Ansible CI
 
 on:
-  workflow_dispatch: # leave this here so other repos can run manually?
+  workflow_dispatch:
   push:
     paths-ignore:
       - '**.md'
