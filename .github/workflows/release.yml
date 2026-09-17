@@ -11,5 +11,5 @@ on:
 jobs:
   release:
     if: github.event.workflow_run.conclusion == 'success'
-    uses: Diehlabs/shared-workflows/.github/workflows/github-release.yml@v0.2.1
+    uses: Diehlabs/shared-workflows/.github/workflows/github-release.yml@v0.2.3
     secrets: inherit
