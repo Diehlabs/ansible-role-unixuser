@@ -35,6 +35,10 @@ platforms:
 
 provisioner:
   name: ansible
+  env:
+    # role_name_check above no longer prevents this in newer Molecule --
+    # set explicitly too.
+    ANSIBLE_ROLES_PATH: ../../..
   config_options:
     defaults:
       interpreter_python: auto_silent
