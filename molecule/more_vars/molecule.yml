@@ -7,7 +7,7 @@ driver:
 
 platforms:
   - name: ubuntu
-    image: ubuntu:20.04
+    image: ubuntu:22.04
     env:
       OBCJ_DISABLE_INITIALIZE_FORK_SAFETY: "YES"
 
