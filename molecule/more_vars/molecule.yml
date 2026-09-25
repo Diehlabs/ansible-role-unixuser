@@ -7,7 +7,7 @@ driver:
 
 platforms:
   - name: ubuntu
-    image: ubuntu:20.04
+    image: ubuntu:22.04
     env:
       OBCJ_DISABLE_INITIALIZE_FORK_SAFETY: "YES"
 
@@ -15,6 +15,7 @@ provisioner:
   name: ansible
   env:
     OBCJ_DISABLE_INITIALIZE_FORK_SAFETY: "YES"
+    ANSIBLE_ROLES_PATH: ../../..
   config_options:
     defaults:
       interpreter_python: auto_silent
