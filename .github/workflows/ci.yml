@@ -11,9 +11,9 @@ on:
 
 jobs:
   default:
-    uses: Diehlabs/shared-workflows/.github/workflows/ansible-ci.yml@v0.2.4
+    uses: Diehlabs/shared-workflows/.github/workflows/ansible-ci.yml@24a1f9f961bd8279d3b0d8058a2969489521ca96 # v0.2.8
 
   more_vars:
-    uses: Diehlabs/shared-workflows/.github/workflows/ansible-ci.yml@v0.2.4
+    uses: Diehlabs/shared-workflows/.github/workflows/ansible-ci.yml@24a1f9f961bd8279d3b0d8058a2969489521ca96 # v0.2.8
     with:
       scenario: more_vars
